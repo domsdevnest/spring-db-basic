@@ -1,10 +1,7 @@
 package com.domsdevnest.jdbc.service;
 
 import com.domsdevnest.jdbc.domain.Member;
-import com.domsdevnest.jdbc.repository.MemberRepository;
-import com.domsdevnest.jdbc.repository.MemberRepositoryV3;
-import com.domsdevnest.jdbc.repository.MemberRepositoryV4_1;
-import com.domsdevnest.jdbc.repository.MemberRepositoryV4_2;
+import com.domsdevnest.jdbc.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -25,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * 예외 누수 문제 해결
  * SQLException 제거
  * MemberRepository 인터페이스에 의존
+ * jdbcTemplate 적용 (v5)
  */
 @Slf4j
 @SpringBootTest
@@ -49,7 +47,8 @@ class MemberServiceV4Test {
 
         @Bean
         MemberRepository memberRepository() {
-            return new MemberRepositoryV4_2(dataSource);
+//            return new MemberRepositoryV4_2(dataSource);
+            return new MemberRepositoryV5(dataSource);
         }
 
         @Bean
